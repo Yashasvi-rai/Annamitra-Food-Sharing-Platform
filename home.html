@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annamitra - Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body, html { margin:0; font-family: 'Segoe UI', sans-serif; height:100vh; }
+    .hero {
+      background: url(https://c8.alamy.com/comp/2F5B8WA/traditional-indian-foods-arranged-as-collage-of-the-cuisine-2F5B8WA.jpg) center/cover no-repeat;
+      height:100%;
+      display:flex; align-items:center; justify-content:center; flex-direction:column; color:white; text-align:center;
+      position:relative;
+    }
+    .hero::before {
+      content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);
+    }
+    .hero-content { position:relative; z-index:2; }
+    .btn-custom { margin:10px; border-radius:30px; font-size:1.2rem; }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Annamitra</h1>
+      <p>Turning Leftovers into Love – One Meal at a Time.</p>
+      <a href="/signup" class="btn btn-light btn-custom">Sign Up</a>
+      <a href="/login" class="btn btn-outline-light btn-custom">Login</a>
+    </div>
+  </section>
+</body>
+</html>

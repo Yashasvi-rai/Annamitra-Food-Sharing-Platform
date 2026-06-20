@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annamitra - Donate</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      background: url("C:\Users\yasha\Downloads\mini project\1.jpg") no-repeat center center/cover;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6); /* dim effect */
+      z-index: 0;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <h2 class="mb-4">Donate Food</h2>
+    <form id="donateForm" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label class="form-label">Your Name</label>
+        <input type="text" name="donor_name" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" name="quantity" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Food Image</label>
+        <input type="file" name="file" class="form-control" accept="image/*" required>
+      </div>
+      <button type="submit" class="btn btn-success">Donate</button>
+    </form>
+    <div id="donateMsg" class="mt-3"></div>
+  </div>
+
+<script>
+  const backendURL = "http://127.0.0.1:5000";
+  document.getElementById("donateForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const formData = new FormData(this);
+    navigator.geolocation.getCurrentPosition(pos => {
+      formData.append("lat", pos.coords.latitude);
+      formData.append("lon", pos.coords.longitude);
+      fetch(`${backendURL}/donate`, { method:"POST", body: formData })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("donateMsg").innerHTML =
+          `<div class="alert alert-success">✅ ${data.message} (${data.food_type}, ${data.location})</div>`;
+      });
+    });
+  });
+</script>
+</body>
+</html>
